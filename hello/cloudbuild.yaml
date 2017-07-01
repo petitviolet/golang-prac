@@ -1,0 +1,9 @@
+steps:
+- name: 'gcr.io/cloud-builders/go:alpine'
+  env: ['PROJECT_ROOT=hello']
+  args: ['build', '-o', 'hello', 'main.go']
+- name: 'gcr.io/cloud-builders/docker'
+  env: ['PROJECT_ROOT=hello']
+  args: ['build', '--tag=asia.gcr.io/$PROJECT_ID/hello', '.']
+
+images: ['asia.gcr.io/$PROJECT_ID/hello']

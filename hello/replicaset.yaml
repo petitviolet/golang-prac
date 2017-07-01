@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: hello
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: hello
+    spec:
+      containers:
+        - image: asia.gcr.io/petit-violet/hello
+          imagePullPolicy: Always
+          name: hello
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-config
+                  key: msg
+
+
